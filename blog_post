@@ -25,9 +25,20 @@ CLI Data Game Project Steps
    - chmod +x house-floor-bills
   - (to be able to run executable without evoking ruby interpreter)
 
-5. git init (could have done this earlier, but this point is actually ok)
-  - git was initialized automatically in step 1!
-  - just commit
+5. create remote repo (could have done this earlier, but it's ok at this point)
+  - git remote add origin git@github.com:dalmaboros/house-floor-bills-cli-app.git
+  - git push -u origin master
 
 6. encapsulate CLI logic in object
-  -
+  - create class HouseFloorBills::CLI in "cli.rb" file in lib
+  - define #call method
+
+7. declare environment load dependencies
+  - bin/house-floor-bills: require './lib/house_floor_bills'
+  - lib/house_floor_bills will require all other files
+    - lib/house_floor_bills: require_relative './house_floor_bills/cli'
+      - delete HouseFloorBills module
+  - pre-written by bundler: require 'house_floor_bills/version'
+    - change to: require_relative "./house_floor_bills/version"
+
+  8.

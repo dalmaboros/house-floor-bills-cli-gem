@@ -1,5 +1,2 @@
-require "house_floor_bills/version"
-
-module HouseFloorBills
-  # Your code goes here...
-end
+require_relative "./house_floor_bills/version"
+require_relative "./house_floor_bills/cli"
