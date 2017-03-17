@@ -1,0 +1,33 @@
+March 17, 2017
+
+------------------------------
+CLI Data Gem Project Ideas
+------------------------------
+
+- top hip hop songs
+- house-floor-bills
+
+------------------------------
+CLI Data Game Project Steps
+------------------------------
+
+1. 'bundle gem house_floor_bills'
+  - tests? y 
+  - MIT license? y 
+  - code of conduct? y
+
+2. create bin file 'house-floor-bills' for executables
+
+3. write shebang line for ruby interpreter in bin file
+  - #!/usr/bin/env ruby
+
+4. grant executable permission
+   - chmod +x house-floor-bills
+  - (to be able to run executable without evoking ruby interpreter)
+
+5. git init (could have done this earlier, but this point is actually ok)
+  - git was initialized automatically in step 1!
+  - just commit
+
+6. encapsulate CLI logic in object
+  -
