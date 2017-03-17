@@ -41,4 +41,6 @@ CLI Data Game Project Steps
   - pre-written by bundler: require 'house_floor_bills/version'
     - change to: require_relative "./house_floor_bills/version"
 
-  8.
+8. stub cli.rb behaviors
+
+9. add spec file I forgot to add!
