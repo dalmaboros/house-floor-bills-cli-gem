@@ -46,3 +46,5 @@ CLI Data Game Project Steps
 03/18/17
 
 9. add spec file I forgot to add!
+
+10. create 'bill.rb' and HouseFloorBills::Bill class, and add to environment file
