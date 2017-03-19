@@ -17,12 +17,9 @@ class HouseFloorBills::CLI
     while input != "exit"
       puts "Enter the number of the bill you want more info on, or type 'list' or type 'exit'"
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "More info on bill 1..."
-      when "2"
-        puts "More info on bill 2..."
-      when "list"
+      if input.to_i > 0
+        puts @bills[input.to_i-1]
+      elsif input == "list"
         list_bills
       else
         puts "Invalid input. Type list or exit"
