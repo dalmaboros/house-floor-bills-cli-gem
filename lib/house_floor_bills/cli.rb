@@ -9,16 +9,20 @@ class HouseFloorBills::CLI
   def list_bills
     puts "House Floor Bills"
     @bills = HouseFloorBills::Bill.this_week
+    @bills.each.with_index(1) do |bill, i|
+      puts "#{i}. #{bill.number} - #{bill.name}"
+    end
   end
 
   def menu
-
     input = nil
     while input != "exit"
       puts "Enter the number of the bill you want more info on, or type 'list' or type 'exit'"
       input = gets.strip.downcase
+
       if input.to_i > 0
-        puts @bills[input.to_i-1]
+        the_bill = @bills[input.to_i-1]
+        puts "#{i}. #{bill.number} - #{bill.name}"
       elsif input == "list"
         list_bills
       else
