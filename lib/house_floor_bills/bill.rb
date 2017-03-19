@@ -27,4 +27,26 @@ class HouseFloorBills::Bill
     #
     # [bill_1, bill_2]
   end
-end
+
+  def self.scrape_site
+    doc = Nokogiri::HTML(open("http://docs.house.gov/floor/Default.aspx"))
+    # @number = doc.search(".legisNum").text
+
+    title = doc.search("div#primaryContent h1 > text()").text.strip.gsub("\r\n      ", " ")
+
+    bills = []
+
+    doc.css(".floorItem").each do |bill|
+      bills << {
+        :number => doc.css(".legisNum").text,
+        :name => doc.css(".floorText").text,
+        :pdf => doc.css(".files").text,
+        :url => "https://www.congress.gov/bill/115th-congress/house-bill/1029"
+      }
+    end
+    bills
+    puts title
+    binding.pry
+  end
+
+end # class

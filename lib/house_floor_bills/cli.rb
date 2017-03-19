@@ -8,6 +8,7 @@ class HouseFloorBills::CLI
 
   def list_bills
     puts "House Floor Bills"
+    HouseFloorBills::Bill.scrape_site
     @bills = HouseFloorBills::Bill.this_week
     @bills.each.with_index(1) do |bill, i|
       puts "#{i}. #{bill.number} - #{bill.name}"
