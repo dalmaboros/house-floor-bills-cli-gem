@@ -24,7 +24,7 @@ class HouseFloorBills::Bill
   def self.scrape_bills
     floor_items = scrape_site.search("table.floorItems > tr.floorItem")
     floor_items.collect do |floor_item|
-      new(num = floor_item.css("td.legisNum").text,
+      new(num = floor_item.css("td.legisNum").text.strip,
       floor_item.css("td.floorText").text.strip,
       floor_item.css("td.files a").attr("href").text,
       "https://www.congress.gov/bill/115th-congress/house-bill/#{num.split.last}")
