@@ -9,7 +9,7 @@ class HouseFloorBills::Bill
   end
 
   def self.all
-    @@all ||= self.scrape_site
+    @@all ||= self.scrape_bills
   end
 
   def self.this_week
