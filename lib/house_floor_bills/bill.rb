@@ -12,6 +12,10 @@ class HouseFloorBills::Bill
     @@all ||= self.scrape_bills
   end
 
+  def self.find(id)
+    self.all[id-1]
+  end
+
   def self.this_week
     # Scrape House of Reps page & return bills based on that data
     self.scrape_bills

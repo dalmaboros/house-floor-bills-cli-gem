@@ -21,7 +21,7 @@ class HouseFloorBills::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        the_bill = HouseFloorBills::Bill.all[input.to_i-1]
+        the_bill = HouseFloorBills::Bill.find(input.to_i)
         puts "\n[#{the_bill.number}] #{the_bill.name}"
         puts "\nURL: #{the_bill.url}"
         puts "PDF: #{the_bill.pdf}"
