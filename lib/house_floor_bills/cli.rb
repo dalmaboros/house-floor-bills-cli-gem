@@ -31,6 +31,16 @@ class HouseFloorBills::CLI
     puts "Enter 'exit' to exit program."
   end
 
+  def open_url(the_bill)
+    puts `open #{the_bill.url}`
+    puts "If URL failed to open, copy and paste into your browser: \n#{the_bill.url}"
+  end
+
+  def open_pdf(the_bill)
+    puts `open #{the_bill.pdf}`
+    puts "If PDF failed to open, copy and paste into your browser: \n#{the_bill.pdf}"
+  end
+
   def menu
     input = nil
     while input != "exit"
@@ -39,22 +49,13 @@ class HouseFloorBills::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        the_bill = HouseFloorBills::Bill.find(input.to_i)
-        print_bill(the_bill)
+        print_bill(HouseFloorBills::Bill.find(input.to_i))
       elsif input == "commands"
         print_commands
-      # open the URL:
       elsif input =~ /open \d/
-        n = "#{input.split.last}"
-        the_bill = HouseFloorBills::Bill.all[n.to_i-1]
-        puts `open #{the_bill.url}`
-        puts "If URL failed to open, copy and paste into your browser: \n#{the_bill.url}"
-      # open the PDF:
+        open_url(HouseFloorBills::Bill.find(input.split.last.to_i))
       elsif input =~ /pdf \d/
-        n = "#{input.split.last}"
-        the_bill = HouseFloorBills::Bill.all[n.to_i-1]
-        puts `open #{the_bill.pdf}`
-        puts "If PDF failed to open, copy and paste into your browser: \n#{the_bill.pdf}"
+        open_pdf(HouseFloorBills::Bill.find(input.split.last.to_i))
       elsif input == "list"
         list_bills
       elsif input == "exit"
