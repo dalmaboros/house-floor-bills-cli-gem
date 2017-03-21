@@ -13,6 +13,24 @@ class HouseFloorBills::CLI
     end
   end
 
+  def print_bill(the_bill)
+    puts "\n[#{the_bill.number}] #{the_bill.name}"
+    puts "\nURL: #{the_bill.url}"
+    puts "PDF: #{the_bill.pdf}"
+    puts "Sponsor: ..."
+    puts "Committees: ..."
+    puts "Status: ..."
+  end
+
+  def print_commands
+    puts "\nCOMMANDS:"
+    puts "Enter 1-#{HouseFloorBills::Bill.all.length} for more info on corresponding bill."
+    puts "Enter 'open 1-#{HouseFloorBills::Bill.all.length}' to open bill URL in browser."
+    puts "Enter 'pdf 1-#{HouseFloorBills::Bill.all.length}' to open bill PDF in browser."
+    puts "Enter 'list' to see the list of bills again."
+    puts "Enter 'exit' to exit program."
+  end
+
   def menu
     input = nil
     while input != "exit"
@@ -22,19 +40,9 @@ class HouseFloorBills::CLI
 
       if input.to_i > 0
         the_bill = HouseFloorBills::Bill.find(input.to_i)
-        puts "\n[#{the_bill.number}] #{the_bill.name}"
-        puts "\nURL: #{the_bill.url}"
-        puts "PDF: #{the_bill.pdf}"
-        puts "Sponsor: ..."
-        puts "Committees: ..."
-        puts "Status: ..."
+        print_bill(the_bill)
       elsif input == "commands"
-        puts "\nCOMMANDS:"
-        puts "Enter 1-#{HouseFloorBills::Bill.all.length} for more info on corresponding bill."
-        puts "Enter 'open 1-#{HouseFloorBills::Bill.all.length}' to open bill URL in browser."
-        puts "Enter 'pdf 1-#{HouseFloorBills::Bill.all.length}' to open bill PDF in browser."
-        puts "Enter 'list' to see the list of bills again."
-        puts "Enter 'exit' to exit program."
+        print_commands
       # open the URL:
       elsif input =~ /open \d/
         n = "#{input.split.last}"
