@@ -15,11 +15,12 @@ class HouseFloorBills::CLI
 
   def print_bill(the_bill)
     puts "\n[#{the_bill.number}] #{the_bill.name}"
-    puts "\nURL: #{the_bill.url}"
+    puts "\nStatus: #{the_bill.status}"
+    puts "Sponsor: #{the_bill.sponsor}"
+    puts "Committees: #{the_bill.committees}"
+    puts "URL: #{the_bill.url}"
     puts "PDF: #{the_bill.pdf}"
-    puts "Sponsor: ..."
-    puts "Committees: ..."
-    puts "Status: ..."
+    puts "Summary: #{the_bill.summary}"
   end
 
   def print_commands
@@ -48,7 +49,7 @@ class HouseFloorBills::CLI
       print ">"
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= HouseFloorBills::Bill.all.length
         print_bill(HouseFloorBills::Bill.find(input.to_i))
       elsif input == "commands"
         print_commands
@@ -59,9 +60,9 @@ class HouseFloorBills::CLI
       elsif input == "list"
         list_bills
       elsif input == "exit"
-        puts "K Bye!"
+        puts "Goodybye!"
       else
-        puts "Invalid input. Type 'commands' to see a list of commands."
+        puts "Invalid input."
       end # if
     end # while
   end # menu
