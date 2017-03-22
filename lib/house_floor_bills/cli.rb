@@ -1,5 +1,8 @@
 class HouseFloorBills::CLI
 
+  puts "\n************* Welcome to House Floor Bills *************"
+  puts "\nSee which bills are scheduled for debate on the House of Representatives floor."
+
   def call
     list_bills
     menu
@@ -33,16 +36,6 @@ class HouseFloorBills::CLI
     puts "Enter 'exit' to exit program."
   end
 
-  def open_url(the_bill)
-    puts `open #{the_bill.url}`
-    puts "If URL failed to open, copy and paste into your browser: \n#{the_bill.url}"
-  end
-
-  def open_pdf(the_bill)
-    puts `open #{the_bill.pdf}`
-    puts "If PDF failed to open, copy and paste into your browser: \n#{the_bill.pdf}"
-  end
-
   def menu
     input = nil
     while input != "exit"
@@ -52,15 +45,15 @@ class HouseFloorBills::CLI
 
       if input.to_i > 0 && input.to_i <= @schedule.bills.length
         # print_bill(HouseFloorBills::Bill.find(input.to_i))
-        print_bill(@schedule.bills[input.to_i-1])
+        print_bill(@schedule.find_bill(input))
       elsif input == "commands"
         print_commands
       elsif input =~ /open \d/
         # open_url(HouseFloorBills::Bill.find(input.split.last.to_i))
-        system("open #{@schedule.bills[input.split.last.to_i-1].url}")
+        system("open #{@schedule.find_bill(input.split.last).url}")
       elsif input =~ /pdf \d/
         # open_pdf(HouseFloorBills::Bill.find(input.split.last.to_i))
-        system("open #{@schedule.bills[input.split.last.to_i-1].pdf}")
+        system("open #{@schedule.find_bill(input.split.last).pdf}")
       elsif input == "list"
         list_bills
       elsif input == "exit"

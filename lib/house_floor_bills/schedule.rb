@@ -11,6 +11,10 @@ class HouseFloorBills::Schedule
     @bills.dup.freeze
   end
 
+  def find_bill(id)
+    @bills[id.to_i-1]
+  end
+
   def add_bill(bill)
     if !bill.is_a?(HouseFloorBills::Bill) #&& !bill.title.empty?
       raise InvalidType, "must be a Bill"
