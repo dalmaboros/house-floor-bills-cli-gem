@@ -1,11 +1,14 @@
 class HouseFloorBills::CLI
 
-  puts "\n************* Welcome to House Floor Bills *************"
-  puts "\nSee which bills are scheduled for debate on the House of Representatives floor."
-
   def call
+    welcome
     list_bills
     menu
+  end
+
+  def welcome
+    puts "\n************* Welcome to House Floor Bills *************"
+    puts "\nSee which bills are scheduled for debate on the House of Representatives floor."
   end
 
   def list_bills
@@ -44,15 +47,12 @@ class HouseFloorBills::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @schedule.bills.length
-        # print_bill(HouseFloorBills::Bill.find(input.to_i))
         print_bill(@schedule.find_bill(input))
       elsif input == "commands"
         print_commands
       elsif input =~ /open \d/
-        # open_url(HouseFloorBills::Bill.find(input.split.last.to_i))
         system("open #{@schedule.find_bill(input.split.last).url}")
       elsif input =~ /pdf \d/
-        # open_pdf(HouseFloorBills::Bill.find(input.split.last.to_i))
         system("open #{@schedule.find_bill(input.split.last).pdf}")
       elsif input == "list"
         list_bills
@@ -60,8 +60,8 @@ class HouseFloorBills::CLI
         puts "Goodybye!"
       else
         puts "Invalid input."
-      end # if
-    end # while
-  end # menu
+      end
+    end
+  end
 
-end # HouseFloorBills::CLI
+end
