@@ -1,7 +1,7 @@
 class InvalidType < StandardError; end
 
 class HouseFloorBills::Schedule
-  attr_accessor :week, :published, :last_updated
+  attr_accessor :week, :published, :last_updated, :title
 
   def initialize
     @bills = []
