@@ -12,8 +12,11 @@ class HouseFloorBills::Schedule
   end
 
   def add_bill(bill)
-    if !bill.is_a?(Bill)
+    if !bill.is_a?(Bill) #&& !bill.title.empty?
       raise InvalidType, "must be a Bill"
+    else
+      @bills << bill
+    end
   end
 
   def first_bill_number
