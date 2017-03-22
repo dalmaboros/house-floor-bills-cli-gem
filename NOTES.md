@@ -27,8 +27,10 @@ A schedule has a last update date
 
 schedule.bills = []
 
-current = HouseFloorBills::Scraper.new(current).scrape
-week_2017_03_27 = HouseFloorBills::Scraper.new(week_2017_03_27).scrape
+Scraper:
+
+current = HouseFloorBills::Scraper.new.scrape
+week_2017_03_27 = HouseFloorBills::Scraper.new("2017-03-27").scrape
 
 week_2017_03_27.bills.first.name #=> Pesticide Registration Enhancement Act of 2017, as amended
 
