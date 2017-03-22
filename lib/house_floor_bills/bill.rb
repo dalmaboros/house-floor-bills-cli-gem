@@ -37,13 +37,12 @@ class HouseFloorBills::Bill
     end
   end
 
-  def self.this_week
-    # Scrape House of Reps page & return bills based on that data
-    self.scrape_bills
-  end
-
   def self.scrape_site
     Nokogiri::HTML(open("http://docs.house.gov/floor/Default.aspx"))
+  end
+
+  def doc
+    @doc ||= Nokogiri::HTML(open(self.url))
   end
 
   def self.scrape_bills
@@ -58,10 +57,6 @@ class HouseFloorBills::Bill
 
   def self.scrape_title
     scrape_site.search("div#primaryContent h1 > text()").text.strip.gsub("\r\n      ", " ")
-  end
-
-  def doc
-    @doc ||= Nokogiri::HTML(open(self.url))
   end
 
 end # class
