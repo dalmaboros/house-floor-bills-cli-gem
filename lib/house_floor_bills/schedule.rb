@@ -19,8 +19,4 @@ class HouseFloorBills::Schedule
     end
   end
 
-  def first_bill_number
-    self.bills.first.number
-  end
-
 end

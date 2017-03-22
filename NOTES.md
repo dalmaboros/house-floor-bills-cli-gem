@@ -25,8 +25,6 @@ A schedule has a last update date
 
 #=> :bills, :week, :published, :last_updated
 
-schedule.bills = []
-
 Scraper:
 
 current = HouseFloorBills::Scraper.new.scrape
@@ -38,6 +36,3 @@ week_2017_03_27.bills.first.name #=> Pesticide Registration Enhancement Act of 2
 2. That class needs to instantiate the schedule for that week
 3. We need to scrape the details of that schedule
 4. We need to scrape the individual bills for that schedule and add them to that instance
-
-HouseFloorSchedule
-HouseFloorBills

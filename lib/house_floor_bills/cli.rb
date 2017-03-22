@@ -6,9 +6,10 @@ class HouseFloorBills::CLI
   end
 
   def list_bills
-    puts "\n************* #{HouseFloorBills::Bill.scrape_title} *************"
-    puts ""
-    HouseFloorBills::Bill.all.each.with_index(1) do |bill, i|
+    s = HouseFloorBills::Scraper.new
+    @schedule = s.scrape
+    puts "\n************* #{@schedule.title} *************\n "
+    @schedule.bills.each.with_index(1) do |bill, i|
       puts "#{i}. #{bill.number} - #{bill.name}"
     end
   end
@@ -25,9 +26,9 @@ class HouseFloorBills::CLI
 
   def print_commands
     puts "\nCOMMANDS:"
-    puts "Enter 1-#{HouseFloorBills::Bill.all.length} for more info on corresponding bill."
-    puts "Enter 'open 1-#{HouseFloorBills::Bill.all.length}' to open bill URL in browser."
-    puts "Enter 'pdf 1-#{HouseFloorBills::Bill.all.length}' to open bill PDF in browser."
+    puts "Enter 1-#{@schedule.bills.length} for more info on corresponding bill."
+    puts "Enter 'open 1-#{@schedule.bills.length}' to open bill URL in browser."
+    puts "Enter 'pdf 1-#{@schedule.bills.length}' to open bill PDF in browser."
     puts "Enter 'list' to see the list of bills again."
     puts "Enter 'exit' to exit program."
   end
@@ -49,7 +50,7 @@ class HouseFloorBills::CLI
       print ">"
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= HouseFloorBills::Bill.all.length
+      if input.to_i > 0 && input.to_i <= @schedule.bills.length
         print_bill(HouseFloorBills::Bill.find(input.to_i))
       elsif input == "commands"
         print_commands
