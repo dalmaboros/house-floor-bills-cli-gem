@@ -1,7 +1,7 @@
 class InvalidType < StandardError; end
 
 class HouseFloorBills::Schedule
-  attr_accessor :week, :published, :last_updated, :title
+  attr_accessor :title, :week, :published, :last_updated
 
   def initialize
     @bills = []
@@ -12,7 +12,7 @@ class HouseFloorBills::Schedule
   end
 
   def add_bill(bill)
-    if !bill.is_a?(Bill) #&& !bill.title.empty?
+    if !bill.is_a?(HouseFloorBills::Bill) #&& !bill.title.empty?
       raise InvalidType, "must be a Bill"
     else
       @bills << bill
