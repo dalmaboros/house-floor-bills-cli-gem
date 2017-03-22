@@ -51,13 +51,16 @@ class HouseFloorBills::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0 && input.to_i <= @schedule.bills.length
-        print_bill(HouseFloorBills::Bill.find(input.to_i))
+        # print_bill(HouseFloorBills::Bill.find(input.to_i))
+        print_bill(@schedule.bills[input.to_i-1])
       elsif input == "commands"
         print_commands
       elsif input =~ /open \d/
-        open_url(HouseFloorBills::Bill.find(input.split.last.to_i))
+        # open_url(HouseFloorBills::Bill.find(input.split.last.to_i))
+        system("open #{@schedule.bills[input.split.last.to_i-1].url}")
       elsif input =~ /pdf \d/
-        open_pdf(HouseFloorBills::Bill.find(input.split.last.to_i))
+        # open_pdf(HouseFloorBills::Bill.find(input.split.last.to_i))
+        system("open #{@schedule.bills[input.split.last.to_i-1].pdf}")
       elsif input == "list"
         list_bills
       elsif input == "exit"
