@@ -1,8 +1,6 @@
 # HouseFloorBills
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/house_floor_bills`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The house-floor-bills CLI gem provides a CLI interface to view the schedule of bills to be debated on the House of Representatives floor this week. Further details about the scheduled bills can be viewed as well. 
 
 ## Installation
 
@@ -38,4 +36,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

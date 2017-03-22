@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Bills to be considered on the house floor.}
   spec.description   = %q{Bills scheduled for debate this week on the House of Representatives floor.}
-  spec.homepage      = "https://github.com/dalmaboros/house-floor-bills-cli-app"
+  spec.homepage      = "https://github.com/dalmaboros/house-floor-bills-cli-gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
