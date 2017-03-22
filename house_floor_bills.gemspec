@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dalma.boros@gmail.com"]
 
   spec.summary       = %q{Bills to be considered on the house floor.}
-  spec.description   = %q{Bills scheduled for debate this week on the House of Representatives floor.}
+  spec.description   = %q{Legislative bills scheduled for debate this week on the United States House of Representatives floor.}
   spec.homepage      = "https://github.com/dalmaboros/house-floor-bills-cli-gem"
   spec.license       = "MIT"
 

@@ -1,6 +1,6 @@
 # HouseFloorBills
 
-The house-floor-bills CLI gem provides a CLI interface to view the schedule of bills to be debated on the House of Representatives floor this week. Further details about the scheduled bills can be viewed as well.
+The house-floor-bills CLI gem provides a CLI interface to view the schedule of legislative bills to be debated on the House of Representatives floor this week. Further details about the scheduled bills can be viewed as well.
 
 ## Installation
 
