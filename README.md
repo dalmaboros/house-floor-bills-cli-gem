@@ -1,26 +1,16 @@
 # HouseFloorBills
 
-The house-floor-bills CLI gem provides a CLI interface to view the schedule of bills to be debated on the House of Representatives floor this week. Further details about the scheduled bills can be viewed as well. 
+The house-floor-bills CLI gem provides a CLI interface to view the schedule of bills to be debated on the House of Representatives floor this week. Further details about the scheduled bills can be viewed as well.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'house_floor_bills'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install house_floor_bills
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the following command in your computer's terminal and follow the on-screen prompts.
+
+    $ house-floor-bills
 
 ## Development
 
