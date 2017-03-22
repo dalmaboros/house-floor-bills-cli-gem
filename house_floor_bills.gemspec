@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dalma Boros"]
   spec.email         = ["dalma.boros@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Bills to be considered on the house floor.}
+  spec.description   = %q{Bills scheduled for debate this week on the House of Representatives floor.}
+  spec.homepage      = "https://github.com/dalmaboros/house-floor-bills-cli-app"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "pry", "~> 0.10.4"
-
+  spec.add_development_dependency "pry"
   spec.add_dependency "nokogiri"
 end

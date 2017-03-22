@@ -7,12 +7,12 @@ class HouseFloorBills::Scraper
   end
 
   def scrape
-    scrape_details
+    scrape_schedule
     scrape_bills
     @schedule
   end
 
-  def scrape_details
+  def scrape_schedule
     # Populate @schedule with more data from the schedule page
     @schedule.title = @doc_schedule.search("div#primaryContent h1 > text()").text.strip.gsub("\r\n      ", " ")
     @schedule.week = @doc_schedule.search("div#primaryContent h1 > text()").text.split("\n").last.strip
