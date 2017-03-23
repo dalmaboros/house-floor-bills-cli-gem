@@ -29,9 +29,11 @@ CLI Data Game Project Steps
   - git remote add origin git@github.com:dalmaboros/house-floor-bills-cli-app.git
   - git push -u origin master
 
-6. encapsulate CLI logic in object
-  - create class HouseFloorBills::CLI in "cli.rb" file in lib
-  - define #call method
+6. create CLI object to encapsulate CLI logic:
+  a) define HouseFloorBills::CLI class in 'lib/cli.rb' and
+    - define #call method
+  b) add dependency to environment file (house_floor_bills.rb)
+    - require_relative "./house_floor_bills/cli"
 
 7. declare environment load dependencies
   - bin/house-floor-bills: require './lib/house_floor_bills'
@@ -43,8 +45,33 @@ CLI Data Game Project Steps
 
 8. stub cli.rb behaviors
 
-03/18/17
-
 9. add spec file I forgot to add!
 
-10. create 'bill.rb' and HouseFloorBills::Bill class, and add to environment file
+10. create the bill object:
+  a) define HouseFloorBills::Bill class in 'bill.rb' and
+  b) add dependency to environment file (house_floor_bills.rb)
+    - require_relative "./house_floor_bills/bill"
+
+11. hard-code fake bill data
+
+12. write real CLI behaviors
+
+13. scrape real bill data
+
+At this point, the program was working, but it wasn't truly object-oriented.
+
+14. create the scraper object:
+  a) define HouseFloorBills::Scraper class in 'scraper.rb' and
+  b) add dependency to environment file (house_floor_bills.rb)
+    - require_relative "./house_floor_bills/scraper"
+
+15. create the schedule object:
+  a) define HouseFloorBills::Schedule class in 'schedule.rb' and
+  b) add dependency to environment file (house_floor_bills.rb)
+    - require_relative "./house_floor_bills/schedule"
+
+16. Made HouseFloorBills::Scraper responsible for all scraping
+
+17. Made HouseFloorBills::Schedule responsible for containing bills
+
+18. Made HouseFloorBills::Bill responsible for containing bill data
