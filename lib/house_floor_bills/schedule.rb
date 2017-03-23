@@ -22,5 +22,4 @@ class HouseFloorBills::Schedule
       @bills << bill
     end
   end
-
 end
