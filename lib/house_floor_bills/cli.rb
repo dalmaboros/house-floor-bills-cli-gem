@@ -47,13 +47,13 @@ class HouseFloorBills::CLI
 
   def menu
     input = nil
-    
+
     while input != "exit"
       puts "\nEnter command (type 'commands' for list of commands):"
       print ">"
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= @schedule.bills.length
+      if input.to_i.between?(1, @schedule.bills.size)
         print_bill(@schedule.find_bill(input))
       elsif input == "commands"
         print_commands
