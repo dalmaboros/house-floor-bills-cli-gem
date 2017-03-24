@@ -33,6 +33,7 @@ class HouseFloorBills::Scraper
       b.committees = doc_bill.search("table.standard01 > tr:nth-child(2) td").text.strip
       b.status = doc_bill.search("ol.bill_progress li.selected  > text()").text.strip
       b.summary = doc_bill.search("div#bill-summary > p").to_s.gsub("</p>","\n\n").gsub(/<\/.+>/,"").gsub(/<.+>/,"")
+
       if b.summary == ""
         b.summary = doc_bill.search("div#main > p").text
       end
