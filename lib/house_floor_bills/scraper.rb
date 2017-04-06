@@ -26,7 +26,16 @@ class HouseFloorBills::Scraper
       b.number = floor_item.css("td.legisNum").text.strip
       b.name = floor_item.css("td.floorText").text.strip
       b.pdf = floor_item.css("td.files a").attr("href").text
-      b.url = "https://www.congress.gov/bill/115th-congress/house-bill/#{b.number.split.last}"
+
+      # Set URL conditionally, based on type of bill:
+      if b.number.split.include? "H.R."
+        b.url = "https://www.congress.gov/bill/115th-congress/house-bill/#{b.number.split.last}"
+      elsif b.number.split.include? "H.Res."
+        b.url = "https://www.congress.gov/bill/115th-congress/house-resolution/#{b.number.split.last}"
+      elsif b.number.split.include? "S."
+        b.url = "https://www.congress.gov/bill/115th-congress/senate-bill/#{b.number.split.last}"
+      end
+      # binding.pry
 
       doc_bill ||= Nokogiri::HTML(open(b.url))
       b.sponsor = doc_bill.search("table.standard01 > tr:first-child a").text.strip
