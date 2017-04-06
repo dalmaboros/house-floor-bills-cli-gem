@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "house_floor_bills"
+require_relative "../lib/house_floor_bills"
 
 HouseFloorBills::CLI.new.call
