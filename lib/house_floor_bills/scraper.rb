@@ -35,14 +35,12 @@ class HouseFloorBills::Scraper
       elsif b.number.split.include? "S."
         b.url = "https://www.congress.gov/bill/115th-congress/senate-bill/#{b.number.split.last}"
       end
-      # binding.pry
 
       doc_bill ||= Nokogiri::HTML(open(b.url))
       b.sponsor = doc_bill.search("table.standard01 > tr:first-child a").text.strip
       b.committees = doc_bill.search("table.standard01 > tr:nth-child(2) td").text.strip
       b.status = doc_bill.search("ol.bill_progress li.selected  > text()").text.strip
-      b.summary = doc_bill.search("div#bill-summary > p").to_s.gsub("</p>","\n\n").gsub(/<\/.+>/,"").gsub(/<.+>/,"")
-
+      b.summary = doc_bill.search("div#bill-summary > p, div#bill-summary li").to_s.gsub("</p>","\n\n").gsub("</li>","\n\n").gsub(/<\/.+>/,"").gsub(/<.+>/,"")
       if b.summary == ""
         b.summary = doc_bill.search("div#main > p").text
       end
