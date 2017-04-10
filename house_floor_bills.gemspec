@@ -6,7 +6,7 @@ require 'house_floor_bills/version'
 Gem::Specification.new do |spec|
   spec.name          = "house_floor_bills"
   spec.version       = HouseFloorBills::VERSION
-  spec.date          = "2017-03-22"
+  spec.date          = "2017-04-10"
   spec.authors       = ["Dalma Boros"]
   spec.email         = ["dalma.boros@gmail.com"]
 
