@@ -3,7 +3,7 @@ class HouseFloorBills::Scraper
 
   def initialize(week = "") # Format of week must be "2017-03-27"
     @schedule = HouseFloorBills::Schedule.new
-    @doc_schedule = Nokogiri::HTML(open("http://docs.house.gov/floor/Default.aspx?date=#{week}"))
+    @doc_schedule = Nokogiri::HTML(open("https://docs.house.gov/floor/Default.aspx?date=#{week}"))
   end
 
   def scrape
