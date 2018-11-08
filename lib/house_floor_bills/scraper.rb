@@ -19,6 +19,7 @@ class HouseFloorBills::Scraper
   end
 
   def scrape_bills
+    print "Loading "
     @doc_schedule.search("table.floorItems > tr.floorItem").collect do |floor_item|
       # Instantiate the bill
       b = HouseFloorBills::Bill.new
@@ -27,6 +28,8 @@ class HouseFloorBills::Scraper
       b.name = floor_item.css("td.floorText").text.strip
       b.pdf = floor_item.css("td.files a").attr("href").text
 
+      print "."
+
       # Set URL conditionally, based on type of bill:
       if b.number.split.include? "H.R."
         b.url = "https://www.congress.gov/bill/115th-congress/house-bill/#{b.number.split.last}"
@@ -34,15 +37,26 @@ class HouseFloorBills::Scraper
         b.url = "https://www.congress.gov/bill/115th-congress/house-resolution/#{b.number.split.last}"
       elsif b.number.split.include? "S."
         b.url = "https://www.congress.gov/bill/115th-congress/senate-bill/#{b.number.split.last}"
+      else
+        b.url = ""
       end
 
-      doc_bill ||= Nokogiri::HTML(open(b.url))
-      b.sponsor = doc_bill.search("table.standard01 > tr:first-child a").text.strip
-      b.committees = doc_bill.search("table.standard01 > tr:nth-child(2) td").text.strip
-      b.status = doc_bill.search("ol.bill_progress li.selected  > text()").text.strip
-      b.summary = doc_bill.search("div#bill-summary > p, div#bill-summary li").to_s.gsub("</p>","\n\n").gsub("</li>","\n\n").gsub(/<\/.+>/,"").gsub(/<.+>/,"")
-      if b.summary == ""
-        b.summary = doc_bill.search("div#main > p").text
+      # Handle error if couldn't get bill URL
+      if b.url == ""
+        # Set all to blank
+        b.sponsor = ""
+        b.committees = ""
+        b.status = ""
+        b.summary = ""
+      else
+        doc_bill ||= Nokogiri::HTML(open(b.url))
+        b.sponsor = doc_bill.search("table.standard01 > tr:first-child a").text.strip
+        b.committees = doc_bill.search("table.standard01 > tr:nth-child(2) td").text.strip
+        b.status = doc_bill.search("ol.bill_progress li.selected  > text()").text.strip
+        b.summary = doc_bill.search("div#bill-summary > p, div#bill-summary li").to_s.gsub("</p>","\n\n").gsub("</li>","\n\n").gsub(/<\/.+>/,"").gsub(/<.+>/,"")
+        if b.summary == ""
+          b.summary = doc_bill.search("div#main > p").text
+        end
       end
       # Add the bill to the schedule
       @schedule.add_bill(b)
