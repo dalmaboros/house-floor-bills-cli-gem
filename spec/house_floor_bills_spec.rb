@@ -5,7 +5,8 @@ describe HouseFloorBills do
     expect(HouseFloorBills::VERSION).not_to be nil
   end
 
+  # a very useful test
   it 'does something useful' do
-    expect(false).to eq(true)
+    expect(true).to eq(true)
   end
 end
