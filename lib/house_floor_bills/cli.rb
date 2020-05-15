@@ -41,6 +41,7 @@ class HouseFloorBills::CLI
     puts "\nEnter a number between '" + "1-#{@schedule.bills.length}".red + "' for more info on corresponding bill."
     puts "Enter '" + "open 1-#{@schedule.bills.length}".red + "' to open bill page in browser."
     puts "Enter '" + "pdf 1-#{@schedule.bills.length}".red + "' to open bill PDF in browser."
+    puts "Enter '" + "live".red + "' to watch the U.S. House of Representatives live"
     puts "Enter '" + "list".red + "' to see the list of bills again."
     puts "Enter '" + "exit".red + "' to exit program."
   end
@@ -63,8 +64,10 @@ class HouseFloorBills::CLI
         system("open #{@schedule.find_bill(input.split.last).pdf}")
       elsif input == "list"
         list_bills
+      elsif input == "live"
+        system("open https://live.house.gov/")
       elsif input == "exit"
-        puts "Goodybye!"
+        puts "💨"
       else
         puts "Invalid input."
       end
