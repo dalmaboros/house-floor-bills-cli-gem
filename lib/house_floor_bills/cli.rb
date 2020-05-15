@@ -1,3 +1,5 @@
+require 'colorize'
+
 class HouseFloorBills::CLI
 
   def call
@@ -7,20 +9,20 @@ class HouseFloorBills::CLI
   end
 
   def welcome
-    puts "\n------ Welcome to House Floor Bills ------"
-    puts "\nBills to be considered on the U.S. House floor:"
+    puts "\n🏛 " + " House Floor Bills ".blue + "🏛"
+    puts "A simple CLI app to display the bills up for consideration on the U.S. House floor this week."
   end
 
   def list_bills
     s = HouseFloorBills::Scraper.new
     @schedule = s.scrape
 
-    puts "\n-------------------------------------------"
-    puts "#{@schedule.title}"
-    puts "-------------------------------------------\n "
+    puts "\n\n-------------------------------------------".green
+    puts "#{@schedule.title}".green
+    puts "-------------------------------------------\n ".green
 
     @schedule.bills.each.with_index(1) do |bill, i|
-      puts "#{i}. #{bill.number} - #{bill.name}"
+      puts "#{i}." + " #{bill.number}".blue + " - #{bill.name}"
     end
   end
 
@@ -36,26 +38,24 @@ class HouseFloorBills::CLI
   end
 
   def print_commands
-    puts "\nCOMMANDS"
-    puts "-------------------------------------------"
-    puts "Enter 1-#{@schedule.bills.length} for more info on corresponding bill."
-    puts "Enter 'open 1-#{@schedule.bills.length}' to open bill page in browser."
-    puts "Enter 'pdf 1-#{@schedule.bills.length}' to open bill PDF in browser."
-    puts "Enter 'list' to see the list of bills again."
-    puts "Enter 'exit' to exit program."
+    puts "\nEnter a number between '" + "1-#{@schedule.bills.length}".red + "' for more info on corresponding bill."
+    puts "Enter '" + "open 1-#{@schedule.bills.length}".red + "' to open bill page in browser."
+    puts "Enter '" + "pdf 1-#{@schedule.bills.length}".red + "' to open bill PDF in browser."
+    puts "Enter '" + "list".red + "' to see the list of bills again."
+    puts "Enter '" + "exit".red + "' to exit program."
   end
 
   def menu
     input = nil
 
     while input != "exit"
-      puts "\nEnter command (type 'commands' for list of commands):"
-      print ">"
+      puts "\nEnter command (type '" + "usage".red + "' for help):"
+      print "> "
       input = gets.strip.downcase
 
       if input.to_i.between?(1, @schedule.bills.size)
         print_bill(@schedule.find_bill(input))
-      elsif input == "commands"
+      elsif input == "usage"
         print_commands
       elsif input =~ /open \d/
         system("open #{@schedule.find_bill(input.split.last).url}")
