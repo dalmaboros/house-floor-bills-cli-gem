@@ -35,7 +35,7 @@ class HouseFloorBills::Scraper
   end
 
   def scrape_bills
-    print "Loading "
+    print "\nLoading bills "
     @doc_schedule.search("table.floorItems > tr.floorItem").collect do |floor_item|
       # Instantiate the bill
       b = HouseFloorBills::Bill.new

@@ -3,6 +3,7 @@
 require "open-uri"
 require "nokogiri"
 require "pry"
+require "colorize"
 
 require_relative "./house_floor_bills/version"
 require_relative "./house_floor_bills/cli"
