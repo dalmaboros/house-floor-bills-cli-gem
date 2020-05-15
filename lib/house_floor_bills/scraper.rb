@@ -18,6 +18,22 @@ class HouseFloorBills::Scraper
     @schedule.week = @doc_schedule.search("div#primaryContent h1 > text()").text.split("\n").last.strip
   end
 
+  def get_congress
+    current_DC_time = Time.now.getlocal('-04:00')
+    
+    start_of_congress_116 = Time.utc(2019,"jan",3,04,00,0)
+    start_of_congress_117 = Time.utc(2021,"jan",3,04,00,0)
+    start_of_congress_118 = Time.utc(2023,"jan",3,04,00,0)
+
+    if current_DC_time < start_of_congress_117
+      return "116th-congress"
+    elsif current_DC_time < start_of_congress_118
+      return "117th-congress"
+    elsif current_DC_time >= start_of_congress_118
+      return "118th-congress"
+    end
+  end
+
   def scrape_bills
     print "Loading "
     @doc_schedule.search("table.floorItems > tr.floorItem").collect do |floor_item|
@@ -32,11 +48,11 @@ class HouseFloorBills::Scraper
 
       # Set URL conditionally, based on type of bill:
       if b.number.split.include? "H.R."
-        b.url = "https://www.congress.gov/bill/115th-congress/house-bill/#{b.number.split.last}"
+        b.url = "https://www.congress.gov/bill/#{get_congress}/house-bill/#{b.number.split.last}"
       elsif b.number.split.include? "H.Res."
-        b.url = "https://www.congress.gov/bill/115th-congress/house-resolution/#{b.number.split.last}"
+        b.url = "https://www.congress.gov/bill/#{get_congress}/house-resolution/#{b.number.split.last}"
       elsif b.number.split.include? "S."
-        b.url = "https://www.congress.gov/bill/115th-congress/senate-bill/#{b.number.split.last}"
+        b.url = "https://www.congress.gov/bill/#{get_congress}/senate-bill/#{b.number.split.last}"
       else
         b.url = ""
       end
