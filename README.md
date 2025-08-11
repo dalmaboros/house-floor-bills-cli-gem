@@ -17,6 +17,8 @@ Once the House Floor Bills gem is installed, type the following command in your 
 
     $ house-floor-bills
 
+To watch a video demonstration of House Floor Bills, click [this link](https://www.youtube.com/watch?v=6LL6yv0-u-4).
+
 ## Development
 
 After checking out the repo, run `bin/setup` in your terminal to install dependencies. To run the tests, enter `rake spec`. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
